@@ -19,3 +19,18 @@ def is_prime(n):
             return False
         i += 6 # new i
     return True
+
+#  Generate a large prime number
+def generate_large_prime(bits):
+                                                          
+    while True:
+        p = random.randint(2**(bits-1), 2**bits)   # generate the prime no
+        if is_prime(p):
+            return p
+
+# Calculate the Greatest Common Divisor of two numbers 
+def gcd(a, b):
+                                                          
+    while b != 0:
+        a, b = b, a % b          # swap a with the b, swap b with the remainder of a nd b after division
+    return a
