@@ -78,3 +78,25 @@ def decrypt(encrypted_msg_c, private_key):
     d, n = private_key
     decrypted_msg = pow(encrypted_msg_c, d, n)  # encrypted message power d mod n
     return decrypted_msg
+
+# Factorize modulus into its prime factors
+def factorize_modulus(n):
+                                                             
+    for i in range(2, int(math.sqrt(n)) + 1): # range of i of factorizing
+        if n % i == 0:
+            return i, n // i
+
+# check the brute force function
+def check(d, public_key, encrypted_message_c):
+    e, n = public_key
+    decrypted_message = pow(encrypted_message_c, d, n)  # encrypted message power d mod n
+    return decrypted_message
+
+# brute force
+def brute_force(public_key, encrypted_message_c):
+    d = 2
+    while True:
+        decrypted_message = check(d, public_key, encrypted_message_c)
+        if decrypted_message:    # If decrypted message is not None
+            return decrypted_message, d
+        d += 1
