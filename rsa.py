@@ -64,3 +64,17 @@ def generate_keys(bits):
     if d<0:
         d+=phi  # d+phi= new d
     return ((e, n), (d, n))  # private key and public key
+
+# Encryption
+def encrypt(message, public_key):
+                                                        
+    e, n = public_key
+    encrypted_msg_c= pow(message,e,n) # message power e mod n
+    return encrypted_msg_c
+
+# Decryption
+def decrypt(encrypted_msg_c, private_key):
+                                                            
+    d, n = private_key
+    decrypted_msg = pow(encrypted_msg_c, d, n)  # encrypted message power d mod n
+    return decrypted_msg
