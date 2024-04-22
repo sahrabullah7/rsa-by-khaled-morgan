@@ -100,6 +100,8 @@ def brute_force(public_key, encrypted_message_c):
         if decrypted_message:    # If decrypted message is not None
             return decrypted_message, d
         d += 1
+
+        
 def main():
     print("RSA Encryption and Decryption\n")
     
