@@ -44,3 +44,23 @@ def extended_gcd(a, b):
         x0, x1 = x1, x0 - q * x1
         y0, y1 = y1, y0 - q * y1
     return a, x0, y0
+
+# Generate RSA public and private keys 
+def generate_keys(bits):
+                                                           
+    while True:
+        p = generate_large_prime(bits)    # generate the 1st prime no
+        q = generate_large_prime(bits)   # generate the 2nd prime no
+        if p != q:  # Ensure p and q are different
+            break
+    n = p * q
+    phi = (p - 1) * (q - 1)
+    while True:  
+        e = random.randrange(2, phi)    # conditions of public key
+        if gcd(e, phi) == 1:
+            break
+    gcd_val, x, y = extended_gcd(e, phi)
+    d = x    
+    if d<0:
+        d+=phi  # d+phi= new d
+    return ((e, n), (d, n))  # private key and public key
