@@ -100,3 +100,52 @@ def brute_force(public_key, encrypted_message_c):
         if decrypted_message:    # If decrypted message is not None
             return decrypted_message, d
         d += 1
+def main():
+    print("RSA Encryption and Decryption\n")
+    
+    # Generate keys
+    bits = int(input("Enter the number of bits for key generation: "))
+    
+    start_time = time.perf_counter()
+
+    public_key, private_key = generate_keys(bits)
+    end_time = time.perf_counter()
+    
+    print("\nPublic Key (e, n):", public_key)
+    print("Private Key (d, n):", private_key)
+
+    # User Input: Define variables for plaintext message
+    plaintext = 99 
+
+    # Encryption
+    
+    encrypted_msg_c = encrypt(plaintext, public_key)
+    print("\nEncrypted message c:", encrypted_msg_c)
+
+    # Decryption
+    
+    decrypted_msg = decrypt(encrypted_msg_c, private_key)
+    print("Decrypted message:", decrypted_msg)
+
+    # Factorize modulus
+    n = public_key[1]
+    p, q = factorize_modulus(n)
+
+    end_time = time.perf_counter()
+
+    print("Factorized Modulus (p, q):", (p, q))
+    print("\nProgram Time: {:.6f} ms".format((end_time - start_time) * 1000))
+
+    # Brute force private exponent
+    start_time = time.perf_counter()
+
+    encrypted_message_c= encrypt(plaintext, public_key)
+    private_exponent = brute_force(public_key, encrypted_message_c)
+
+    end_time = time.perf_counter()
+    
+    print("\nBrute Force Time: {:.6f} ms".format((end_time - start_time) * 1000))
+    print("Private exponent d:", private_exponent)
+# Run the program
+if __name__ == "__main__":
+    main()
